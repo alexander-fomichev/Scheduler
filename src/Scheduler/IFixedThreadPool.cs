@@ -8,7 +8,7 @@ namespace Scheduler
     /// <summary>
     /// Интерфейс пула потоков с фиксированным количеством потоков
     /// </summary>
-    public interface IFixedThreadPool
+    public interface IFixedThreadPool: IDisposable
     {
         /// <summary>
         /// Добавляет задачу в очередь на выполнение с указанным приоритетом

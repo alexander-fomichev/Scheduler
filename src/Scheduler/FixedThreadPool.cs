@@ -14,6 +14,7 @@ namespace Scheduler
     {
         // Флаг остановки пула
         private volatile bool _stopped = false;
+        private bool isDisposed;
 
         // Рабочие потоки
         private readonly Thread[] _threads;
@@ -93,6 +94,24 @@ namespace Scheduler
                 return true;
             }
             return false;
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!isDisposed)
+            {
+                if (disposing)
+                {
+                    this.Stop();
+                }
+                isDisposed = true;
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
         }
     }
 }

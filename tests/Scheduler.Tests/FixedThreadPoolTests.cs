@@ -65,4 +65,33 @@ public class FixedThreadPoolTests
         
         Assert.Equal(2, tasksCompleted);
     }
+
+    [Fact]
+    public void Should_Dispose_Correctly_Without_Exceptions()
+    {
+        // Arrange
+        var pool = new FixedThreadPool(2);
+
+        // Act + Assert (проверяем, что Dispose не выбрасывает исключений)
+        var exception = Record.Exception(() =>
+        {
+            pool.Execute(new Scheduler.Task(() => Thread.Sleep(100)), Priority.HIGH);
+            pool.Dispose(); // Явный вызов Dispose
+        });
+        Assert.Null(exception); // нет исключений
+    }
+
+    [Fact]
+    public void Should_Not_Accept_Tasks_After_Dispose()
+    {
+        // Arrange
+        var pool = new FixedThreadPool(2);
+        pool.Dispose();
+
+        // Act
+        var result = pool.Execute(new Scheduler.Task(() => { }), Priority.NORMAL);
+
+        // Assert
+        Assert.False(result); // задачи не принимаются
+    }
 }
