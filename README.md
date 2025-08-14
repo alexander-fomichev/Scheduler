@@ -54,8 +54,8 @@ using Scheduler;
 using var pool = new FixedThreadPool(4);
 
 // Добавляем задачи
-pool.Execute(new Task(() => Console.WriteLine("High")), Priority.HIGH);
-pool.Execute(new Task(() => Console.WriteLine("Normal")), Priority.NORMAL);
+pool.Execute(new Scheduler.Task(() => Console.WriteLine("High")), Priority.HIGH);
+pool.Execute(new Scheduler.Task(() => Console.WriteLine("Normal")), Priority.NORMAL);
 
 // Останавливаем пул
 pool.Stop();
