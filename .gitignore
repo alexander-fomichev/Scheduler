@@ -1,0 +1,15 @@
+# Игнорируем служебные папки
+bin/
+obj/
+.vs/
+TestResults/
+coveragereport/
+
+# Файлы IDE
+*.user
+*.suo
+*.vscode/
+
+# NuGet
+packages/
+*.nupkg
